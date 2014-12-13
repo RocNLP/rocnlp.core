@@ -13,9 +13,13 @@ import rocnlp.core.structures.common.AttributeImplicit._
 
 
 object WordNet {
-  val path = "E:/databases/wordnet"
-  val graph: Neo4jGraph = Neo4jGraph.open(path)
-  val gs = GremlinScala(graph)
+  var path = "path/to/wordnetNeo4J"
+
+  def apply(p:String) = path = p
+
+  lazy val graph: Neo4jGraph = Neo4jGraph.open(path)
+  lazy val gs = GremlinScala(graph)
+
   def disconnect = graph.close()
 
   /**

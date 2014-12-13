@@ -12,8 +12,10 @@ import rocnlp.core.structures.common._
 class WordnetTest extends FunSpec with ShouldMatchers   {
 
 
+  WordNet("E:/databases/wordnet")
 
   describe("an apple") {
+
     val apple:Word = WordNet.getWord("apple")
 
     it("should exist in wordnet") {
