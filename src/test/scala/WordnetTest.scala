@@ -4,8 +4,10 @@
 import org.scalatest.matchers._
 import org.scalatest.FunSpec
 
-import rocnlp.structures.common._
-import rocnlp.lexicon.wordnet.{SenseKey, Synset, WordNet}
+import rocnlp.core.lexicon.wordnet._
+
+import rocnlp.core.structures.common._
+
 
 class WordnetTest extends FunSpec with ShouldMatchers   {
 

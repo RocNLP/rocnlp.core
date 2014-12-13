@@ -1,4 +1,4 @@
-package rocnlp.structures.common
+package rocnlp.core.structures.common
 
 /**
  * Created by Omid on 12/9/2014.
@@ -10,7 +10,7 @@ object AttributeImplicit{
 }
 
 case class Attribute(values:List[IAttribute]){
-
+  def this() = this(Nil)
   def get[Q](className:Class[_]) =
     values.filter(e => className.getName.contains(e.getClass.getName)).map(q => q.asInstanceOf[Q])
 

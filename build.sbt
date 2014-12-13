@@ -13,7 +13,3 @@ libraryDependencies <++= scalaVersion { scalaVersion =>
 }
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.1" % "test"
-
-//libraryDependencies += "com.chuusai" % "shapeless_2.10.4" % "2.0.0"
-//
-//libraryDependencies += "org.scala-lang" % "scala-reflect" % "2.10.4"
