@@ -14,7 +14,7 @@ class WordnetTest extends FunSpec with ShouldMatchers   {
 
 
   describe("an apple") {
-    val apple = WordNet.getWord("apple")
+    val apple:Word = WordNet.getWord("apple")
 
     it("should exist in wordnet") {
       println(WordNet.getWord("apple"))
@@ -24,25 +24,25 @@ class WordnetTest extends FunSpec with ShouldMatchers   {
     }
 
 
-    val atr = apple.attributes.get[Synset](Synset.getClass)
+    val senses = apple.attributes.get[Synset]
 
     it("have two synsets"){
-      atr.size should be(2)
+      senses.size should be(2)
     }
 
     it ("first sense should have these properties") {
-      val apple1 = atr.head
+      val apple1 = senses.head
       apple1.definitions.size should be(1)
       apple1.examples.size should be(0)
     }
 
     it("definition has these properties"){
-      val d1 = atr.head.definitions.head
+      val d1 = senses.head.definitions.head
       d1.words.size should be(14)
       d1.words(0).lemma should be("fruit")
       val word4 = d1.words(4)
-      word4.attributes.get[Index](Index.getClass).head.value should be(4)
-      d1.words(0).attributes.get[SenseKey](SenseKey.getClass).size should be(1)
+      word4.attributes.get[Index].head.value should be(4)
+      d1.words(0).attributes.get[SenseKey].size should be(1)
     }
   }
 
