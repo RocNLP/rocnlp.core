@@ -8,13 +8,22 @@ scalaVersion := "2.10.4"
 
 resolvers += Resolver.url("typesafe-ivy-repo", url("http://typesafe.artifactoryonline.com/typesafe/releases"))(Resolver.ivyStylePatterns)
 
+//libraryDependencies <++= scalaVersion { scalaVersion =>
+//  val gremlinVersion = "3.0.0.M5"
+//  Seq(
+//    "com.michaelpollmeier" %% "gremlin-scala" % gremlinVersion,
+//    "com.tinkerpop" % "neo4j-gremlin" % gremlinVersion
+//  )
+//}
+
 libraryDependencies <++= scalaVersion { scalaVersion =>
-  val gremlinVersion = "3.0.0.M5"
+  val gremlinVersion = "3.0.0.M6"
   Seq(
-    "com.michaelpollmeier" %% "gremlin-scala" % gremlinVersion,
+    "com.michaelpollmeier" %% "gremlin-scala" % "3.0.0.M6c" exclude("org.slf4j", "slf4j-log4j12"),
     "com.tinkerpop" % "neo4j-gremlin" % gremlinVersion
   )
 }
+
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.1" % "test"
 

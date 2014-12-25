@@ -30,7 +30,7 @@ object WordNet {
 
   def apply(p:String) = path = p
 
-  lazy val graph: Neo4jGraph = Neo4jGraph.open(path)
+  lazy val graph = Neo4jGraph.open(path)
   lazy val gs = GremlinScala(graph)
 
   def disconnect = graph.close()
@@ -91,13 +91,13 @@ object WordNet {
       //val vvv = v.outE().toList()
       if (v.out("senseTag").toList.size > 0) {
         val SK = SenseTag(v.out("senseTag").head().value[String]("senseKey"))
-        val ww = Word(v.value[String]("lemma"),
-          Attribute(WordNetPOS(v.value[String]("pos")) :: Index(v.value[Int]("sIndex")) :: SK :: Nil))
+        val ww = Word(v.value[String]("lemma").get,
+          Attribute(WordNetPOS(v.value[String]("pos").get) :: Index(v.value[Int]("sIndex").get) :: SK :: Nil))
         words = words :+ ww
       }
       else {
-        val ww = Word(v.value[String]("lemma"),
-          Attribute(WordNetPOS(v.value[String]("pos")) :: Index(v.value[Int]("sIndex")) :: Nil))
+        val ww = Word(v.value[String]("lemma").get,
+          Attribute(WordNetPOS(v.value[String]("pos").get) :: Index(v.value[Int]("sIndex").get) :: Nil))
         words = words :+ ww
       }
 //      v = v.out("next").head()
@@ -118,9 +118,9 @@ object WordNet {
       exps.map(d => getSentence(d)).toIndexedSeq
     }
 
-    Synset(v.value[String]("senseKey"),v.value[String]("senseID")
-      , v.value[String]("lemma").split(",").map(Word(_,Nil)).toSeq
-      , v.value[String]("gloss"),WordNetPOS(v.value[String]("wordnetPos")),getDefs,getExmps)
+    Synset(v.value[String]("senseKey").get,v.value[String]("senseID").get
+      , v.value[String]("lemma").get.split(",").map(Word(_,Nil)).toSeq
+      , v.value[String]("gloss").get,WordNetPOS(v.value[String]("wordnetPos").get),getDefs,getExmps)
   }
 
   // implicits for synsets
