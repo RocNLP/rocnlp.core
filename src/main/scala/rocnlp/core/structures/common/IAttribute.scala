@@ -22,6 +22,8 @@ case class Attribute(values:List[IAttribute]){
 
 case class Index(value:Int) extends IAttribute
 
-abstract class POS(value:String) extends IAttribute
+trait POS extends IAttribute
+
+
 
 

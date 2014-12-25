@@ -14,6 +14,9 @@ class WordnetTest extends FunSpec with ShouldMatchers   {
 
   WordNet("E:/databases/wordnet")
 
+//  WordNet.getSynsets("tall",WordNetPOS.a)
+
+
   describe("an apple") {
 
     val apple:Word = WordNet.getWord("apple")
@@ -40,12 +43,21 @@ class WordnetTest extends FunSpec with ShouldMatchers   {
 
     it("definition has these properties"){
       val d1 = senses.head.definitions.head
-      d1.words.size should be(14)
+      d1.words.size should be(15)
       d1.words(0).lemma should be("fruit")
       val word4 = d1.words(4)
       word4.attributes.get[Index].head.value should be(4)
-      d1.words(0).attributes.get[SenseKey].size should be(1)
+      d1.words(0).attributes.get[SenseTag].size should be(1)
+    }
+
+    it("it has some relations"){
+      val appleSynset = apple.attributes.get[Synset].head
+      import rocnlp.core.lexicon.wordnet.WordNet.SynsetImplicits
+      val appleHypers = appleSynset ==>(WordNetRelation.HYPERNYM)
+      appleHypers.get.size should be(2)
     }
   }
+
+
 
 }
