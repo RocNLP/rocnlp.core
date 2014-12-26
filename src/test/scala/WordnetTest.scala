@@ -11,7 +11,7 @@ import rocnlp.core.structures.common._
 
 class WordnetTest extends FunSpec with ShouldMatchers   {
 
-  WordNet.disconnect
+  
   WordNet("E:/databases/wordnet")
 
 //  WordNet.getSynsets("tall",WordNetPOS.a)
