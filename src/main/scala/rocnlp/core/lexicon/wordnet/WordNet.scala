@@ -33,7 +33,9 @@ object WordNet {
   lazy val graph = Neo4jGraph.open(path)
   lazy val gs = GremlinScala(graph)
 
-  def disconnect = graph.close()
+  def disconnect =
+    if(graph != null)
+      graph.close()
 
   /**
    * find the word from Wordnet

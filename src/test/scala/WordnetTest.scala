@@ -11,7 +11,7 @@ import rocnlp.core.structures.common._
 
 class WordnetTest extends FunSpec with ShouldMatchers   {
 
-
+  WordNet.disconnect
   WordNet("E:/databases/wordnet")
 
 //  WordNet.getSynsets("tall",WordNetPOS.a)
@@ -57,6 +57,7 @@ class WordnetTest extends FunSpec with ShouldMatchers   {
       appleHypers.get.size should be(2)
     }
   }
+
 
 
 
