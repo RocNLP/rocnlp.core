@@ -33,9 +33,10 @@ object WordNet {
   lazy val graph = Neo4jGraph.open(path)
   lazy val gs = GremlinScala(graph)
 
-  def disconnect =
-    if(graph != null)
+  def disconnect = {
+    if (graph != null)
       graph.close()
+  }
 
   /**
    * find the word from Wordnet
@@ -54,14 +55,18 @@ object WordNet {
   }
 
 
-  def getSynsets(lemma:String, pos:WordNetPOS):Option[List[Synset]] = {
-
+  def getSynsets(lemma:String, pos:WordNetPOS):Option[IndexedSeq[Synset]] = {
     val v = gs.V.has(label,"word").has("lemma",lemma).toList()
     if (v.size == 0)
       None
-    else
-      Some(gs.V.has(label, "word").has("lemma", lemma).out("synset")
-        .toList().map(element => vertexToSynset(element)).filter(_.wordnetPos == pos))
+    else {
+      val oute = gs.V.has(label, "word").has("lemma", lemma).outE("synset").toList()
+      val tups = oute.map(e => (vertexToSynset(e.inV.toList.get(0)),e.value[Int]("senseNumber")))
+        .filter(_._1.wordnetPos== pos)
+      Some(tups.sortBy(_._2).map(_._1).toIndexedSeq)
+    }
+//      Some(gs.V.has(label, "word").has("lemma", lemma).out("synset")
+//        .toList().map(element => vertexToSynset(element)).filter(_.wordnetPos == pos))
   }
 
   def getSynsets(pos:WordNetPOS):Option[List[Synset]] =

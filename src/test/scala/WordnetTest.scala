@@ -11,7 +11,7 @@ import rocnlp.core.structures.common._
 
 class WordnetTest extends FunSpec with ShouldMatchers   {
 
-  
+
   WordNet("E:/databases/wordnet")
 
 //  WordNet.getSynsets("tall",WordNetPOS.a)
@@ -55,6 +55,16 @@ class WordnetTest extends FunSpec with ShouldMatchers   {
       import rocnlp.core.lexicon.wordnet.WordNet.SynsetImplicits
       val appleHypers = appleSynset ==>(WordNetRelation.HYPERNYM)
       appleHypers.get.size should be(2)
+    }
+  }
+
+  //todo: this sense key is not correct, tall(a) or tall ? add more tests for sense key
+  describe("All sense numbers fot tall should be in correct order"){
+    val tallSenses = WordNet.getSynsets("tall",WordNetPOS.a).get
+    it("has match all sense keys") {
+      tallSenses(0).senseKey should be("tall%3:00:00::")
+      //tallSenses(3).senseKey should be("tall%3:00:00:incredible:00")
+
     }
   }
 
