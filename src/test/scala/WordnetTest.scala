@@ -22,7 +22,7 @@ class WordnetTest extends FunSpec with ShouldMatchers   {
     val apple:Word = WordNet.getWord("apple")
 
     it("should exist in wordnet") {
-      println(WordNet.getWord("apple"))
+//      println(WordNet.getWord("apple"))
 
 
       apple.attributes.size > 0 should be(true)
@@ -64,7 +64,13 @@ class WordnetTest extends FunSpec with ShouldMatchers   {
     it("has match all sense keys") {
       tallSenses(0).senseKey should be("tall%3:00:00::")
       //tallSenses(3).senseKey should be("tall%3:00:00:incredible:00")
+    }
+  }
 
+  describe("test for part of speech in gloss"){
+    val tallSenses = WordNet.getSynsets("tall",WordNetPOS.a).get
+    it("checkin pos for tall, second definition, second word") {
+      tallSenses(0).definitions(1).words(2).attributes.get[PenPOS].head.value should be("NN")
     }
   }
 

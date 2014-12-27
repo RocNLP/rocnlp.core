@@ -5,6 +5,9 @@ import rocnlp.core.structures.common._
 /**
  * Created by Omid on 12/13/2014.
  */
+
+case class PenPOS(value:String) extends POS
+
 case class WordNetPOS(value:String) extends POS
 
 object WordNetPOS{

@@ -80,7 +80,7 @@ object WordNet {
       None
   }
 
-  def getRelation (synset:Synset, relation:WordNetRelation):Option[List[Synset]] = {
+  def getRelation(synset:Synset, relation:WordNetRelation):Option[List[Synset]] = {
     val v = gs.V.has(label,"synset").has("senseKey",synset.senseKey).out(relation.value).toList()
     if(v.size > 0)
       Some(v.map(vertexToSynset(_)))
@@ -99,12 +99,12 @@ object WordNet {
       if (v.out("senseTag").toList.size > 0) {
         val SK = SenseTag(v.out("senseTag").head().value[String]("senseKey"))
         val ww = Word(v.value[String]("lemma").get,
-          Attribute(WordNetPOS(v.value[String]("pos").get) :: Index(v.value[Int]("sIndex").get) :: SK :: Nil))
+          Attribute(PenPOS(v.value[String]("pos").get) :: Index(v.value[Int]("sIndex").get) :: SK :: Nil))
         words = words :+ ww
       }
       else {
         val ww = Word(v.value[String]("lemma").get,
-          Attribute(WordNetPOS(v.value[String]("pos").get) :: Index(v.value[Int]("sIndex").get) :: Nil))
+          Attribute(PenPOS(v.value[String]("pos").get) :: Index(v.value[Int]("sIndex").get) :: Nil))
         words = words :+ ww
       }
 //      v = v.out("next").head()
