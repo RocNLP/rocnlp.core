@@ -13,7 +13,7 @@ import rocnlp.core.structures.trees.Syntax.stanford.CollapsedCCDependency
 class WordnetTest extends FunSpec with ShouldMatchers   {
 
 
-  WordNet("E:/databases/wordnet")
+  //WordNet("E:/databases/wordnet")
 
 //  WordNet.getSynsets("tall",WordNetPOS.a)
 

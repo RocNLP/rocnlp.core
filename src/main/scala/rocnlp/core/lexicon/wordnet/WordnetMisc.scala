@@ -12,7 +12,7 @@ case class WordNetPOS(value:String) extends POS
 
 object WordNetPOS{
   val a = WordNetPOS("a")
-  val n = WordNetPOS("b")
+  val n = WordNetPOS("n")
   val v = WordNetPOS("v")
   val r = WordNetPOS("r")
   val s = WordNetPOS("s")
