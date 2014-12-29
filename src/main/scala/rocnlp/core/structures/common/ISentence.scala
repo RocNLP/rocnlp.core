@@ -3,7 +3,7 @@ package rocnlp.core.structures.common
 /**
  * Created by Omid on 12/8/2014.
  */
-trait ISentence{}
+trait ISentence
 
 /**
  * Sentence contains all properties of a sentence

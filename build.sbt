@@ -31,6 +31,8 @@ libraryDependencies += "org.scala-lang" % "scala-reflect" % "2.10.4"
 
 libraryDependencies += "org.scala-sbt" % "io" % "0.13.6"
 
+libraryDependencies += "com.assembla.scala-incubator" %% "graph-core" % "1.9.0"
+
 
 //publishing
 //

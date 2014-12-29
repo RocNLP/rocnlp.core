@@ -7,6 +7,7 @@ import org.scalatest.FunSpec
 import rocnlp.core.lexicon.wordnet._
 
 import rocnlp.core.structures.common._
+import rocnlp.core.structures.trees.Syntax.stanford.CollapsedCCDependency
 
 
 class WordnetTest extends FunSpec with ShouldMatchers   {
@@ -24,10 +25,8 @@ class WordnetTest extends FunSpec with ShouldMatchers   {
     it("should exist in wordnet") {
 //      println(WordNet.getWord("apple"))
 
-
       apple.attributes.size > 0 should be(true)
     }
-
 
     val senses = apple.attributes.get[Synset]
 
@@ -48,6 +47,7 @@ class WordnetTest extends FunSpec with ShouldMatchers   {
       val word4 = d1.words(4)
       word4.attributes.get[Index].head.value should be(4)
       d1.words(0).attributes.get[SenseTag].size should be(1)
+
     }
 
     it("it has some relations"){
@@ -55,6 +55,20 @@ class WordnetTest extends FunSpec with ShouldMatchers   {
       import rocnlp.core.lexicon.wordnet.WordNet.SynsetImplicits
       val appleHypers = appleSynset ==>(WordNetRelation.HYPERNYM)
       appleHypers.get.size should be(2)
+    }
+  }
+
+  describe("tall definition dependency tree"){
+    it("has two definition with specific tree"){
+      val tall = WordNet.getSynsets("tall",WordNetPOS.a).get(0)
+      val dep = tall.definitions.head.attributes.get[CollapsedCCDependency].head
+      dep.tree.nodes.size should be(4)
+      dep.tree.edges.size should be(2)
+      dep.tree.edges.filter(_.label == "prep_in").size should be(1)
+      dep.tree.edges.filter(_.label == "prep_in").head.from.lemma should be("great")
+      dep.tree.edges.filter(_.label == "prep_in").head.to.lemma should be("dimension")
+
+
     }
   }
 
