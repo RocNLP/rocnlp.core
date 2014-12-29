@@ -3,7 +3,9 @@ package rocnlp.core.structures.common
 /**
  * Created by Omid on 12/9/2014.
  */
-trait IAttribute
+
+@SerialVersionUID(1L)
+trait IAttribute extends Serializable
 
 object AttributeImplicit{
   implicit def listToAtr(from:List[IAttribute]) = Attribute(from)
@@ -11,9 +13,9 @@ object AttributeImplicit{
 
 
 import scala.reflect._
-case class Attribute(values:List[IAttribute]){
+@SerialVersionUID(1L)
+case class Attribute(values:List[IAttribute]) extends Serializable{
   def this() = this(Nil)
-
 
   def get[Q](implicit q:ClassTag[Q]) =
     values.filter(e => q.runtimeClass.getName.contains(e.getClass.getName)).map(q => q.asInstanceOf[Q])
@@ -21,9 +23,11 @@ case class Attribute(values:List[IAttribute]){
   def size = values.size
 }
 
-case class Index(value:Int) extends IAttribute
+@SerialVersionUID(1L)
+case class Index(value:Int) extends IAttribute with Serializable
 
-trait POS extends IAttribute
+@SerialVersionUID(1L)
+trait POS extends IAttribute with Serializable
 
 
 

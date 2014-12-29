@@ -6,7 +6,8 @@ import scalax.collection.Graph
 import scalax.collection.edge.Implicits._
 import scalax.collection.edge.LDiEdge
 
-case class CollapsedCCDependency(val tree: Graph[Word,LDiEdge]) extends DependencyTree[Word,LDiEdge]
+@SerialVersionUID(1L)
+case class CollapsedCCDependency(val tree: Graph[Word,LDiEdge]) extends DependencyTree[Word,LDiEdge] with Serializable
 
 //object scratch{
 //
