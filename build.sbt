@@ -49,7 +49,7 @@ publishArtifact in Test := false
 pomIncludeRepository := { _ => false }
 
 pomExtra := (
-  <url>http:rocnlp.org</url>
+  <url>http://rocnlp.org</url>
     <licenses>
       <license>
         <name>BSD-style</name>

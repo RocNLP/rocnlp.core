@@ -13,9 +13,14 @@ import rocnlp.core.structures.trees.Syntax.stanford.CollapsedCCDependency
 class WordnetTest extends FunSpec with ShouldMatchers   {
 
 
-  //WordNet("E:/databases/wordnet")
+  WordNet("E:/databases/wordnet")
 
 //  WordNet.getSynsets("tall",WordNetPOS.a)
+//  import com.tinkerpop.gremlin.process.T._
+//  println(WordNet.gs.V.has(label,"word").outE("synset").has("pos","noun").filter(e => e.value[Int]("senseNumber") > 1).toList())
+
+  println(WordNet.getSynset(SenseTag("grouping%1:03:00::")).get.gloss)
+  println(WordNet.getSynset(SenseTag("group%1:03:00::")).get.gloss)
 
 
   describe("an apple") {
@@ -69,6 +74,12 @@ class WordnetTest extends FunSpec with ShouldMatchers   {
       dep.tree.edges.filter(_.label == "prep_in").head.to.lemma should be("dimension")
 
 
+    }
+  }
+
+  describe("sense key"){
+    it("can work for group and grouping with two different senseKey"){
+      WordNet.getSynset(SenseTag("grouping%1:03:00::")) should be (WordNet.getSynset(SenseTag("group%1:03:00::")))
     }
   }
 

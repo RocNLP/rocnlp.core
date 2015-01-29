@@ -5,12 +5,14 @@ import rocnlp.core.structures.common._
 /**
  * Created by Omid on 12/13/2014.
  */
+@SerialVersionUID(1L)
+case class PenPOS(value:String) extends POS with Serializable
 
-case class PenPOS(value:String) extends POS
+@SerialVersionUID(1L)
+case class WordNetPOS(value:String) extends POS with Serializable
 
-case class WordNetPOS(value:String) extends POS
-
-object WordNetPOS{
+@SerialVersionUID(1L)
+object WordNetPOS extends Serializable{
   val a = WordNetPOS("a")
   val n = WordNetPOS("n")
   val v = WordNetPOS("v")
@@ -20,9 +22,14 @@ object WordNetPOS{
   val allPOS = Seq(a,n,v,r,s)
 }
 
-case class WordNetRelation(value:String)
+@SerialVersionUID(1L)
+case class WordNetRelation(value:String) extends IRelation with Serializable
+
+@SerialVersionUID(1L)
+case class WordNetGlossRelation(value:String) extends IRelation with Serializable
 //
-object WordNetRelation{
+@SerialVersionUID(1L)
+object WordNetRelation extends Serializable{
 //
     // All categories
     val ANTONYM = WordNetRelation("antonym")

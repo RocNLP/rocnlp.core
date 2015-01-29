@@ -78,9 +78,16 @@ object WordNet {
     Some(gs.V.has(label,"synset").has("wordnetPos",pos.value).toList().map(vertexToSynset(_)))
 
   def getSynset(tag:SenseTag):Option[Synset] = {
-    val seneses = gs.V.has(label,"synset").has("senseKey",tag.value).toList()
-    if(seneses.size > 0)
-      Some(vertexToSynset(seneses.head))
+//    val seneses = gs.V.has(label,"synset").has("senseKey",tag.value).toList()
+//    if(seneses.size > 0)
+//      Some(vertexToSynset(seneses.head))
+//    else
+//      None
+
+    val senses = gs.E.has(label,"synset").has("senseKey",tag.value).map(e => e.inV().toList.get(0)).toList()
+
+    if(senses.size > 0)
+      Some(vertexToSynset(senses.head))
     else
       None
   }
@@ -92,6 +99,10 @@ object WordNet {
     else
       None
   }
+
+//  def getRelationChain(rels:Seq[WordNetRelation]) ={
+//
+//  }
 
 
 //  private def getSentence(w:ScalaVertex)= {
@@ -166,7 +177,7 @@ object WordNet {
     CollapsedCCDependency(scalax.collection.Graph.from(words.map(_._2),edges))
   }
 
-  private def vertexToSynset(v:ScalaVertex)= {
+  def vertexToSynset(v:ScalaVertex)= {
     def getDefs = {
       val defs = v.out("definition").toList
       //val a = defs.map(d => getSentence2(d)).toIndexedSeq
